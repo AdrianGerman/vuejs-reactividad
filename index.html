@@ -2,31 +2,28 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hola mundo!</title>
 </head>
 
 <body>
     <div id="app">
-        <span></span>
-        <br />
-        <input type="text" />
+        <span v-text="message"></span>
+        <br>
+        <input type="text" v-model="message">
     </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
-        const data = {
-            message: "Hola mundo!"
-        };
-        const span = document.querySelector("span");
-        span.innerText = data.message;
-
-        const input = document.querySelector("input");
-        input.value = data.message;
-
-        input.addEventListener("input", () => {
-            data.message = input.value;
-            span.innerText = data.message;
+        const { createApp } = Vue;
+        const app = createApp({
+            data() {
+                return {
+                    message: "Hola Vue!",
+                };
+            },
         });
+        app.mount("#app");
     </script>
 </body>
 
