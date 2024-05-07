@@ -16,11 +16,11 @@
             <div class="cart-content">
                 <div class="cart-content__product">
                     <img src="" alt="" />
-                    <span>Producto - $500.000</span>
+                    <span>{{ product.name }} - ${{ new Intl.NumberFormat("es-MX").format(product.price) }}</span>
                 </div>
                 <div class="cart-content__product">
                     <img src="" alt="" />
-                    <span>Producto - $500.000</span>
+                    <span>{{ product.name }} - ${{ new Intl.NumberFormat("es-MX").format(product.price) }}</span>
                 </div>
             </div>
         </header>
@@ -35,11 +35,11 @@
                 </div>
             </section>
             <section class="description">
-                <h4>Producto</h4>
+                <h4>{{ product.name.toUpperCase() }} {{ product.stock == 0 ? ":(" : ":)" }}</h4>
                 <span class="badge new">Nuevo</span>
                 <span class="badge offer">Oferta</span>
                 <p class="description__status"></p>
-                <p class="description__price">$500.000</p>
+                <p class="description__price">${{ new Intl.NumberFormat("es-MX").format(product.price) }}</p>
                 <p class="description__content">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
                     ea sapiente doloremque magni quae nihil, nostrum esse omnis debitis illum non aut facere numquam
@@ -60,8 +60,25 @@
         const app = createApp({
             data() {
                 return {
-                    message: "Hola Vue!"
-                };
+                    product: {
+                        name: "Cámara",
+                        price: 450_000,
+                        stock: 0,
+                        content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
+                    ea sapiente doloremque magni quae nihil, nostrum esse omnis debitis illum non aut facere numquam
+                    cupiditate hic.`,
+                        images: [
+                            {
+                                image: "./images/camara.jpg",
+                                thumbnail: "./images/camara-thumb.jpg"
+                            },
+                            {
+                                image: "./images/camara-2.jpg",
+                                thumbnail: "./images/camara-2-thumb.jpg"
+                            }
+                        ]
+                    }
+                }
             }
         });
         app.mount("#app");
