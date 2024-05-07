@@ -1,10 +1,16 @@
 class MiniReviReactive {
+  // dependecias
+  deps = new Map();
+
   constructor({ data }) {
     const origen = data();
+
+    const self = this;
 
     this.$data = new Proxy(origen, {
       get(target, name) {
         if (Reflect.has(target, name)) {
+          self.track(target, name);
           return Reflect.get(target, name);
         }
         console.warn("La propiedad que intentas acceder no existe");
@@ -12,10 +18,27 @@ class MiniReviReactive {
       },
       set(target, name, value) {
         Reflect.set(target, name, value);
+        self.trigger(name);
       },
     });
 
     this.mount();
+  }
+
+  track(target, name) {
+    if (!this.deps.has(name)) {
+      const effect = () => {
+        document.querySelectorAll(`*[p-text=${name}]`).forEach((el) => {
+          this.pText(el, target, name);
+        });
+      };
+      this.deps.set(name.effect);
+    }
+  }
+
+  trigger(name) {
+    const effect = this.deps.get(name);
+    effect();
   }
 
   mount() {
