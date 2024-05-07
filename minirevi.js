@@ -3,11 +3,12 @@ class MiniReviReactive {
   deps = new Map();
 
   constructor({ data }) {
-    const origen = data();
+    this.origen = data();
 
     const self = this;
 
-    this.$data = new Proxy(origen, {
+    // destino
+    this.$data = new Proxy(this.origen, {
       get(target, name) {
         if (Reflect.has(target, name)) {
           self.track(target, name);
@@ -32,10 +33,9 @@ class MiniReviReactive {
           this.pText(el, target, name);
         });
       };
-      this.deps.set(name.effect);
+      this.deps.set(name, effect);
     }
   }
-
   trigger(name) {
     const effect = this.deps.get(name);
     effect();
