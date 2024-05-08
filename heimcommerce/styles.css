@@ -83,6 +83,7 @@ main .product .product__thumbnails .thumb {
   background-repeat: no-repeat;
   background-position: center;
   margin-bottom: 8px;
+  cursor: pointer;
 }
 
 main .product .product__thumbnails .thumb.active {

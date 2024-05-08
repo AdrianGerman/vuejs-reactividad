@@ -11,7 +11,7 @@
     <div id="app">
       <header>
         <h3>HeimCommerce</h3>
-        <button class="cart">Carro (0)</button>
+        <button class="cart" v-on:click="cartOpen = !cartOpen">Carro (0)</button>
         <div class="cart-content" v-show="cartOpen">
           <div
             class="cart-content__product"
@@ -36,10 +36,11 @@
               v-for="(image, index) in product.images"
               :key="image.thumbnail"
               :style="{ backgroundImage: 'url(' + product.images[index].thumbnail + ')' }"
+              @click="activeImage = index"
             ></div>
           </div>
           <div class="product__image">
-            <img src="" alt="" />
+            <img :src="product.images[activeImage].image" :alt="product.name" />
           </div>
         </section>
         <section class="description">
@@ -60,9 +61,15 @@
           </p>
           <div class="discount">
             <span>Código de descuento: </span>
-            <input type="text" placeholder="Ingresa tu código" />
+            <input
+              type="text"
+              placeholder="Ingresa tu código"
+              @keyup.enter="product.price *= 50 / 100"
+            />
           </div>
-          <button :disabled="product.stock === 0">Agregar al carrito</button>
+          <button :disabled="product.stock === 0" @click="product.stock -= 1">
+            Agregar al carrito
+          </button>
         </section>
       </main>
     </div>
@@ -76,7 +83,7 @@
             product: {
               name: "Cámara",
               price: 450_000,
-              stock: 0,
+              stock: 5,
               content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
                     ea sapiente doloremque magni quae nihil, nostrum esse omnis debitis illum non aut facere numquam
                     cupiditate hic.`,
