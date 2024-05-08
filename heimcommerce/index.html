@@ -13,7 +13,7 @@
         <header>
             <h3>HeimCommerce</h3>
             <button class="cart">Carro (0)</button>
-            <div class="cart-content">
+            <div class="cart-content" v-show="cartOpen">
                 <div class="cart-content__product">
                     <img v-bind:src="product.images[0].image" :alt="product.name.toUpperCase()" />
                     <span>{{ product.name }} - ${{ new Intl.NumberFormat("es-MX").format(product.price) }}</span>
@@ -38,9 +38,11 @@
             </section>
             <section class="description">
                 <h4>{{ product.name.toUpperCase() }} {{ product.stock == 0 ? ":(" : ":)" }}</h4>
-                <span class="badge new">Nuevo</span>
-                <span class="badge offer">Oferta</span>
-                <p class="description__status"></p>
+                <span class="badge new" v-if="product.new">Nuevo</span>
+                <span class="badge offer" v-if="product.offer">Oferta</span>
+                <p class="description__status" v-if="product.stock === 3 || product.stock === 2">Quedan pocas unidades!
+                </p>
+                <p class="description__status" v-else-if="product.stock === 1">Ultima unidad!</p>
                 <p class="description__price">${{ new Intl.NumberFormat("es-MX").format(product.price) }}</p>
                 <p class="description__content">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
@@ -51,7 +53,7 @@
                     <span>Código de descuento: </span>
                     <input type="text" placeholder="Ingresa tu código" />
                 </div>
-                <button>Agregar al carrito</button>
+                <button :disabled="product.stock === 0">Agregar al carrito</button>
             </section>
         </main>
     </div>
@@ -78,8 +80,11 @@
                                 image: "./images/camara-2.jpg",
                                 thumbnail: "./images/camara-2-thumb.jpg"
                             }
-                        ]
+                        ],
+                        new: false,
+                        offer: true
                     },
+                    cartOpen: false,
                     activeImage: 0
                 };
             }

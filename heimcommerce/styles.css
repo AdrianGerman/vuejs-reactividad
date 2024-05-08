@@ -131,10 +131,12 @@ main .description button {
   color: #fefefe;
   border: none;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 main .description button:disabled {
   background: rgb(159, 159, 228);
+  cursor: default;
 }
 
 .badge {
