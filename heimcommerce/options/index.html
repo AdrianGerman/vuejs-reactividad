@@ -28,9 +28,7 @@
         </div>
       </header>
       <main>
-        <product></product>
-        <product></product>
-        <product></product>
+        <product v-for="product in products" :key="product.name" :product="product"></product>
       </main>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -40,6 +38,71 @@
       const app = createApp({
         data() {
           return {
+            products: [
+              {
+                name: "Cámara",
+                price: 450_000,
+                stock: 5,
+                content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
+                          ea sapiente doloremque magni quae nihil, nostrum esse omnis debitis illum non aut facere numquam
+                          cupiditate hic.`,
+                images: [
+                  {
+                    image: "./images/camara.jpg",
+                    thumbnail: "./images/camara-thumb.jpg",
+                  },
+                  {
+                    image: "./images/camara-2.jpg",
+                    thumbnail: "./images/camara-2-thumb.jpg",
+                  },
+                ],
+                new: false,
+                offer: true,
+                quantity: 1,
+              },
+              {
+                name: "Cámara 2",
+                price: 350_000,
+                stock: 2,
+                content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
+                          ea sapiente doloremque magni quae nihil, nostrum esse omnis debitis illum non aut facere numquam
+                          cupiditate hic.`,
+                images: [
+                  {
+                    image: "./images/camara.jpg",
+                    thumbnail: "./images/camara-thumb.jpg",
+                  },
+                  {
+                    image: "./images/camara-2.jpg",
+                    thumbnail: "./images/camara-2-thumb.jpg",
+                  },
+                ],
+                new: false,
+                offer: true,
+                quantity: 1,
+              },
+              {
+                name: "Cámara 3",
+                price: 250_000,
+                stock: 1,
+                content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
+                          ea sapiente doloremque magni quae nihil, nostrum esse omnis debitis illum non aut facere numquam
+                          cupiditate hic.`,
+                images: [
+                  {
+                    image: "./images/camara.jpg",
+                    thumbnail: "./images/camara-thumb.jpg",
+                  },
+                  {
+                    image: "./images/camara-2.jpg",
+                    thumbnail: "./images/camara-2-thumb.jpg",
+                  },
+                ],
+                new: false,
+                offer: true,
+                quantity: 1,
+              },
+            ],
             cartOpen: true,
             cart: [],
           };

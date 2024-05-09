@@ -42,30 +42,9 @@ app.component("product", {
     <button :disabled="product.stock === 0" @click="addToCart()">Agregar al carrito</button>
   </section>
 `,
-
+  props: ["product"],
   data() {
     return {
-      product: {
-        name: "Cámara",
-        price: 450_000,
-        stock: 5,
-        content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
-                  ea sapiente doloremque magni quae nihil, nostrum esse omnis debitis illum non aut facere numquam
-                  cupiditate hic.`,
-        images: [
-          {
-            image: "./images/camara.jpg",
-            thumbnail: "./images/camara-thumb.jpg",
-          },
-          {
-            image: "./images/camara-2.jpg",
-            thumbnail: "./images/camara-2-thumb.jpg",
-          },
-        ],
-        new: false,
-        offer: true,
-        quantity: 1,
-      },
       activeImage: 0,
       discountCodes: ["GERMAN100", "ADRIGER20"],
     };
