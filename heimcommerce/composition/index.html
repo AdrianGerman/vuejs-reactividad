@@ -25,6 +25,7 @@
               product.quantity) }} - ({{ product.quantity }})</span
             >
           </div>
+          <p>Total: $ {{ new Intl.NumberFormat("es-MX").format(total) }}</p>
         </div>
       </header>
       <main>
@@ -38,7 +39,7 @@
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
-      const { createApp, ref, reactive, toRefs } = Vue;
+      const { createApp, ref, reactive, toRefs, watch } = Vue;
 
       const app = createApp({
         setup() {
@@ -111,6 +112,7 @@
           const cartState = reactive({
             cartOpen: true,
             cart: [],
+            total: 0,
           });
 
           function addToCart(product) {
@@ -122,6 +124,14 @@
             }
             product.stock -= 1;
           }
+
+          watch(cartState.cart, (value, oldValue) => {
+            cartState.total = cartState.cart.reduce((prev, curr) => {
+              const prevPrice = prev.price || prev;
+              const prevQuantity = prev.quantity || 1;
+              return prevPrice * prevQuantity + curr.price * curr.quantity;
+            }, 0);
+          });
 
           return {
             ...toRefs(cartState),
