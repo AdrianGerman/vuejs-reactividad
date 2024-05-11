@@ -44,71 +44,7 @@
       const app = createApp({
         data() {
           return {
-            products: [
-              {
-                name: "Cámara",
-                price: 450_000,
-                stock: 5,
-                content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
-                          ea sapiente doloremque magni quae nihil, nostrum esse omnis debitis illum non aut facere numquam
-                          cupiditate hic.`,
-                images: [
-                  {
-                    image: "./images/camara.jpg",
-                    thumbnail: "./images/camara-thumb.jpg",
-                  },
-                  {
-                    image: "./images/camara-2.jpg",
-                    thumbnail: "./images/camara-2-thumb.jpg",
-                  },
-                ],
-                new: true,
-                offer: true,
-                quantity: 1,
-              },
-              {
-                name: "Cámara 2",
-                price: 350_000,
-                stock: 2,
-                content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
-                          ea sapiente doloremque magni quae nihil, nostrum esse omnis debitis illum non aut facere numquam
-                          cupiditate hic.`,
-                images: [
-                  {
-                    image: "./images/camara.jpg",
-                    thumbnail: "./images/camara-thumb.jpg",
-                  },
-                  {
-                    image: "./images/camara-2.jpg",
-                    thumbnail: "./images/camara-2-thumb.jpg",
-                  },
-                ],
-                new: false,
-                offer: true,
-                quantity: 1,
-              },
-              {
-                name: "Cámara 3",
-                price: 250_000,
-                stock: 1,
-                content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
-                          ea sapiente doloremque magni quae nihil, nostrum esse omnis debitis illum non aut facere numquam
-                          cupiditate hic.`,
-                images: [
-                  {
-                    image: "./images/camara.jpg",
-                    thumbnail: "./images/camara-thumb.jpg",
-                  },
-                  {
-                    image: "./images/camara-2.jpg",
-                    thumbnail: "./images/camara-2-thumb.jpg",
-                  },
-                ],
-                new: false,
-                offer: true,
-                quantity: 1,
-              },
-            ],
+            products: [],
             cartOpen: true,
             cart: [],
             /* total: 0, */
@@ -145,6 +81,13 @@
               return prevPrice * prevQuantity + curr.price * curr.quantity;
             }, 0);
           },
+        },
+        created() {
+          fetch("https://my-json-server.typicode.com/AdrianGerman/demo/products")
+            .then((res) => res.json())
+            .then((data) => {
+              this.products = data;
+            });
         },
       });
     </script>
