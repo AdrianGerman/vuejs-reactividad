@@ -28,9 +28,21 @@
           <p>Total: $ {{ new Intl.NumberFormat("es-MX").format(total) }}</p>
         </div>
       </header>
+      <section class="input-search">
+        <div class="form__group">
+          <h2>Buscar productos 🔎</h2>
+          <input
+            class="form__input"
+            type="text"
+            placeholder="Buscar producto..."
+            v-model="filtro"
+          />
+          <label for="name" class="form__label">Resultados</label>
+        </div>
+      </section>
       <main>
         <product
-          v-for="product in products"
+          v-for="product in filteredProducts"
           :key="product.name"
           :product="product"
           @sendtocart="addToCart($event)"
@@ -95,10 +107,22 @@
               products.value = data;
             });
 
+          const filtro = ref("");
+          filteredProducts = computed(() => {
+            if (filtro.value != "") {
+              return products.value.filter((product) =>
+                product.name.toUpperCase().includes(filtro.value.toUpperCase())
+              );
+            }
+            return products.value;
+          });
+
           return {
             ...toRefs(cartState),
             products,
             addToCart,
+            filtro,
+            filteredProducts,
             // total,
           };
         },

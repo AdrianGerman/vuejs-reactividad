@@ -1,5 +1,4 @@
 body {
-  font-family: sans-serif;
   font-size: 18px;
 }
 
@@ -7,6 +6,7 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 header {
@@ -60,6 +60,48 @@ header .cart-content .cart-content__product.bg-gray {
 
 header .cart-content .cart-content__product img {
   width: 50px;
+}
+
+.input-search {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.input-search h2 {
+  margin-bottom: 2rem;
+}
+
+.form__label {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  margin-left: 2rem;
+  margin-top: 0.7rem;
+  display: block;
+  transition: all 0.3s;
+  transform: translateY(0rem);
+}
+
+.form__input {
+  font-family: "Roboto", sans-serif;
+  color: #333;
+  font-size: 1.2rem;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  border-radius: 0.2rem;
+  background-color: rgb(240, 240, 240);
+  border: none;
+  width: 50%;
+  display: block;
+  border-bottom: 0.3rem solid transparent;
+  transition: all 0.3s;
+}
+
+.form__input:placeholder-shown + .form__label {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translateY(-4rem);
+  transform: translateY(-4rem);
 }
 
 main {
