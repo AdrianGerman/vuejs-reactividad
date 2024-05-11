@@ -39,75 +39,11 @@
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
-      const { createApp, ref, reactive, toRefs, watch, computed } = Vue;
+      const { createApp, ref, reactive, toRefs, watch, computed, onMounted } = Vue;
 
       const app = createApp({
         setup() {
-          const products = ref([
-            {
-              name: "Cámara",
-              price: 450_000,
-              stock: 5,
-              content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
-                          ea sapiente doloremque magni quae nihil, nostrum esse omnis debitis illum non aut facere numquam
-                          cupiditate hic.`,
-              images: [
-                {
-                  image: "./images/camara.jpg",
-                  thumbnail: "./images/camara-thumb.jpg",
-                },
-                {
-                  image: "./images/camara-2.jpg",
-                  thumbnail: "./images/camara-2-thumb.jpg",
-                },
-              ],
-              new: false,
-              offer: true,
-              quantity: 1,
-            },
-            {
-              name: "Cámara 2",
-              price: 350_000,
-              stock: 5,
-              content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
-                          ea sapiente doloremque magni quae nihil, nostrum esse omnis debitis illum non aut facere numquam
-                          cupiditate hic.`,
-              images: [
-                {
-                  image: "./images/camara.jpg",
-                  thumbnail: "./images/camara-thumb.jpg",
-                },
-                {
-                  image: "./images/camara-2.jpg",
-                  thumbnail: "./images/camara-2-thumb.jpg",
-                },
-              ],
-              new: false,
-              offer: true,
-              quantity: 1,
-            },
-            {
-              name: "Cámara 3",
-              price: 250_000,
-              stock: 5,
-              content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro perspiciatis magnam, pariatur totam
-                          ea sapiente doloremque magni quae nihil, nostrum esse omnis debitis illum non aut facere numquam
-                          cupiditate hic.`,
-              images: [
-                {
-                  image: "./images/camara.jpg",
-                  thumbnail: "./images/camara-thumb.jpg",
-                },
-                {
-                  image: "./images/camara-2.jpg",
-                  thumbnail: "./images/camara-2-thumb.jpg",
-                },
-              ],
-              new: false,
-              offer: true,
-              quantity: 1,
-            },
-          ]);
+          const products = ref([]);
 
           const cartState = reactive({
             cartOpen: true,
@@ -148,6 +84,16 @@
               return prevPrice * prevQuantity + curr.price * curr.quantity;
             }, 0);
           }); */
+
+          onMounted(() => {
+            console.log("mounted");
+          });
+
+          fetch("https://my-json-server.typicode.com/AdrianGerman/demo/products")
+            .then((res) => res.json())
+            .then((data) => {
+              products.value = data;
+            });
 
           return {
             ...toRefs(cartState),
